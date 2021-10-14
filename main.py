@@ -1,4 +1,3 @@
-import threading
 import tkinter
 import tkinter.filedialog
 import os
@@ -206,24 +205,4 @@ root.bind_all("<Alt-Key>", hotkey)
 
 buttonCapture.place(x=30, y=10, width=140, height=40)
 # 启动消息主循环
-
-import win32gui, win32con
-import threading
-import time
-
-def hotkey2():
-    win32gui.RegisterHotKey(0, 99, win32con.MOD_WIN, win32con.VK_F10)
-    while 1:
-        try:
-            time.sleep(1)
-            msg = win32gui.GetMessage(0, 0, 0)
-            if msg[1][2] == 99:
-                print(msg)
-                buttonCaptureClick()
-        except Exception as e:
-            print(e)
-xxx = threading.Thread(target=hotkey2)
-xxx.setDaemon(True)  # 设置守护线程，当线程结束，守护线程同时关闭，要不然这个线程会一直运行下去。
-xxx.start()
-
 root.mainloop()
